@@ -9,14 +9,16 @@ const config = require('../../../config.js')
  */
 const help = (msg, client) => {
   if (msg.content === `${config.prefix}help`) {
-    const username = client ? client.user.username : 'Miembro'
-    const avatarUrl = client ? client.user.displayAvatarURL() : ''
+    const username = client.user.username;
+    const avatarUrl = client.user.displayAvatarURL();
 
     const entretenimiento = `
     **${config.prefix}8ball [pregunta]**: Preguntame algo
     **${config.prefix}gif [nombre]**: Te busco un gif
     **${config.prefix}hola**: Te saludo
     **${config.prefix}avatar**: Muestranos a todos tu hermosa foto
+    **${config.prefix}flip**: Tira una moneda al aire
+    **${config.prefix}say [var]**: Haz que yo hable
     `;
     const utilidades = `
     **${config.prefix}npm**: Busca algun paquete de npm
@@ -24,24 +26,25 @@ const help = (msg, client) => {
     **${config.prefix}ping**: Quieres saber que tan rapido soy?
     `
     const server = `
+    **${config.prefix}server**: Informacion sobre el server
     **${config.prefix}inv**: Invita gente
-    **${config.prefix}sug**: Sugerencia para el server
-    **${config.prefix}ticket [pregunta]**: Preguntame algo
+    **${config.prefix}sug [sugerencia]**: Sugerencia para el server
+    **${config.prefix}ticket**: Abre un canal con los admins
     `
     const embed = new MessageEmbed()
     .setAuthor(msg.author.username, msg.author.displayAvatarURL())
       .setTitle('El comando de ayuda, solo para ti 😃')
       .addFields(
         {
-          name: "🎮 Entretenimiento",
+          name: '🎮 Entretenimiento',
           value: entretenimiento,
         },
         {
-          name: "✨ Utilidades",
+          name: '✨ Utilidades',
           value: utilidades,
         },
         {
-          name: "⚙ Server",
+          name: '⚙ Server',
           value: server,
         },
       )

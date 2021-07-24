@@ -17,7 +17,7 @@ const ticket = (msg, client) => {
     
 client.on('clickButton', (button) => {
     const everyone = msg.guild.roles.cache.find(rol => rol.name === '@everyone');
-    const admins = msg.guild.roles.cache.find(rol => rol.name === 'admin');
+    const admins = msg.guild.roles.cache.find(rol => rol.name === '《 ✊ 》Admin');
     const clickButton = button.clicker.user.username.toLowerCase();
     if (button.id === 'open-ticket') {
         msg.guild.channels.create(`${clickButton}-st`, {

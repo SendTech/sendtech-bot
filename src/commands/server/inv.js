@@ -34,21 +34,7 @@ const invitation = (msg, client) => {
     if (button.id === copyUrlBtnId) {
       console.log(`Ejecutando ${button.id}`)
       console.log(button.guild)
-      clipboardy.writeSync('https://discord.gg/4FUtbhatAg')
-      // const embed = new MessageEmbed()
-      //   .setAuthor(client.user.username, client.user.displayAvatarURL())
-      //   .setTitle('Mensaje copiado?')
-      //   .setDescription(
-      //     `
-      //     Aveces en windows no funciona, ve si te copio la url si no copia la url que esta mas arriba
-          
-      //      Si estas en **Linux** o **Mac**, ignora este mensaje :)
-      //     `
-      //   )
-      //   .setColor(config.embedColor)
-      //   .setThumbnail('https://media.giphy.com/media/MJTOHmGiGPHgI/giphy.gif')
-
-      // await button.channel.send(embed)
+      clipboardy.writeSync(config.serverUrl)
     }
 
     await button.reply.defer()

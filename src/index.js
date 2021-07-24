@@ -7,10 +7,13 @@ const gif = require('./commands/entretenimiento/gif');
 const hola = require('./commands/entretenimiento/hola');
 const ball = require('./commands/entretenimiento/8ball.js')
 const avatar = require('./commands/entretenimiento/avatar.js');
+const flipCoin = require('./commands/entretenimiento/flipCoin.js');
+const say = require('./commands/entretenimiento/say.js');
 // Server
 const invitation = require('./commands/server/inv.js');
 const suggest = require('./commands/server/suggest.js');
 const ticket = require('./commands/server/tickets.js');
+const server = require('./commands/server/server.js');
 // Utilidades
 const help = require('./commands/utilidades/help.js');
 const npm = require('./commands/utilidades/npm.js');
@@ -19,29 +22,33 @@ const url = require('./commands/utilidades/URLcutter.js');
 const wiki = require('./commands/utilidades/wiki.js');
 // admin
 const renameChannel = require('./commands/admin/renameChannel.js');
-const deleteChannel = require('./commands/admin/deleteChannel.js')
+const deleteChannel = require('./commands/admin/deleteChannel.js');
+const lockChannel = require('./commands/admin/lockChannel.js');
+const unlockChannel = require('./commands/admin/unlockChannel.js');
+const helpAdmin = require('./commands/admin/helpAdmin.js');
 
 // El intents le da permiso para dar roles y dar la bienvenida
 const client = new Client({ ws: { intents: 32767 } })
-const welcomeEmbed = require('./utils/welcomeEmbed')
+const welcomeEmbed = require('./utils/welcomeEmbed');
 require('discord-buttons')(client)
 
 // Hace algo cuando el bot esta online
 client.on('ready', () => {
   console.log('Estado del bot:', client.user.presence.status)
-  console.log('100% [██████████] Cargado')
+  console.log('100% ██████████ Cargado')
   presence(client)
 })
 
-// Ve cuando entra un nuevo usuario al server
 client.on('guildMemberAdd', (member) => {
   const channelWelcome = member.guild.channels.cache.get('790999067060600852')
+  const channelCount = member.guild.channels.cache.get('868511890245058600')
   // add Rol Member
   member.roles.add('790977106698960918')
   // Msg Welcome user
   const embed = welcomeEmbed(member)
-
-  channelWelcome.send(embed).then((member) => member.react('👋'))
+  channelWelcome.send(embed).then(msg => msg.react('👋'))
+  // Channel edit
+  channelCount.setName(`👥 ﹞Somos ${member.guild.memberCount} Devs`)
 })
 
 client.on('message', (msg) => {
@@ -56,16 +63,15 @@ client.on('message', (msg) => {
     const command = args.shift().toLowerCase()
 
     try {
-      /*
-       *  TODO: Buscar una manera de ejecutar los comandos
-       *  de manera que sea rapida y eficiente para el servidor
-       */
       switch (command) {
         case 'ping':
           pingPong(msg)
           break
         case 'npm':
           npm(msg, args)
+          break 
+        case 'server':
+          server(msg)
           break
         case 'url':
           url(msg, args)
@@ -76,6 +82,9 @@ client.on('message', (msg) => {
         case 'suggest':
         case 'sug':
           suggest(msg, args, command)
+          break
+        case 'flip':
+          flipCoin(msg)
           break
         case 'hola' || 'Hola':
           hola(msg)
@@ -99,11 +108,23 @@ client.on('message', (msg) => {
         case 'rename':
           renameChannel(msg, args)
           break
+        case 'helpst':
+          helpAdmin(msg)
+          break
         case 'delete':
-          deleteChannel(msg, args)
+          deleteChannel(msg)
+        break
+        case 'lock':
+          lockChannel(msg)
+        break
+        case 'unlock':
+          unlockChannel(msg)
         break
         case '8ball':
           ball(msg, args)
+        break
+        case 'say':
+          say(msg, args)
         break
       }
     } catch (err) {

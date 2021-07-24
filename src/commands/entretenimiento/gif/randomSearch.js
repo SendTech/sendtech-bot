@@ -12,18 +12,22 @@ const randomSearch = async (msg, rating) => {
   const randomTags = ['code', 'development', 'programming', 'gaming', 'hacker']
   const randomIdNumber = getRandomNumber(randomTags.length)
 
-  console.log(randomTags[randomIdNumber])
   const giphyRandomUrl = `https://api.giphy.com/v1/gifs/random?api_key=${config.GIPHY_API_KEY}&rating=${rating}&tag=${randomTags[randomIdNumber]}`
 
   const response = await fetch(giphyRandomUrl)
   const giphyRandomData = await response.json()
 
   const gifUrl = giphyRandomData.data.images.original.url
-}
-catch (err) {
+
   const embed = new MessageEmbed()
-  .setTitle('No se ha encontrado ningún gif')
-  .setColor(config.embedColor)
+    .setImage(gifUrl)
+    .setColor(config.embedColor)
+  msg.channel.send(embed);
+}
+  catch (err) {
+  const embed = new MessageEmbed()
+    .setTitle('Error inesperado')
+    .setColor(config.embedColor)
   return msg.channel.send(embed)
 }
 } 
