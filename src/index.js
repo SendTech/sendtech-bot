@@ -41,14 +41,16 @@ client.on('ready', () => {
 
 client.on('guildMemberAdd', (member) => {
   const channelWelcome = member.guild.channels.cache.get('864259226380402698')
-  // const channelCount = member.guild.channels.cache.get('868511890245058600')
+  const channelCount = member.guild.channels.cache.get('868511890245058600')
   // add Rol Member
-  // member.roles.add('790977106698960918')
+  member.roles.add('790977106698960918')
   // Msg Welcome user
-  const welcomeCanvas = welcomeEmbed()
-  channelWelcome.send(welcomeCanvas).then(msg => msg.react('👋'))
+  const embed = welcomeEmbed()
+  channelWelcome.send(embed).then(msg => msg.react('👋'))
+  // const welcomeCanvas = welcomeEmbed()
+  // channelWelcome.send(welcomeCanvas).then(msg => msg.react('👋'))
   // Channel edit
-  // channelCount.setName(`👥 ﹞Somos ${member.guild.memberCount} Devs`)
+  channelCount.setName(`👥 ﹞Somos ${member.guild.memberCount} Devs`)
 })
 
 client.on('message', (msg) => {
