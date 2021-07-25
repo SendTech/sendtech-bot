@@ -29,7 +29,7 @@ const helpAdmin = require('./commands/admin/helpAdmin.js');
 
 // El intents le da permiso para dar roles y dar la bienvenida
 const client = new Client({ ws: { intents: 32767 } })
-const welcomeEmbed = require('./utils/welcomeEmbed');
+const welcomeMsg = require('./utils/welcomeEmbed');
 require('discord-buttons')(client)
 
 // Hace algo cuando el bot esta online
@@ -40,17 +40,17 @@ client.on('ready', () => {
 })
 
 client.on('guildMemberAdd', (member) => {
-  const channelWelcome = member.guild.channels.cache.get('864259226380402698')
-  const channelCount = member.guild.channels.cache.get('868511890245058600')
+  const channelWelcome = member.guild.channels.cache.get('864258272176242732')
+  // const channelCount = member.guild.channels.cache.get('868511890245058600')
   // add Rol Member
-  member.roles.add('790977106698960918')
+  // member.roles.add('790977106698960918')
   // Msg Welcome user
-  const embed = welcomeEmbed()
-  channelWelcome.send(embed).then(msg => msg.react('👋'))
+  const canvaMsg = welcomeMsg(Client)
+  channelWelcome.send(canvaMsg).then(msg => msg.react('👋'))
   // const welcomeCanvas = welcomeEmbed()
   // channelWelcome.send(welcomeCanvas).then(msg => msg.react('👋'))
   // Channel edit
-  channelCount.setName(`👥 ﹞Somos ${member.guild.memberCount} Devs`)
+  // channelCount.setName(`Somos ${member.guild.memberCount} Devs`)
 })
 
 client.on('message', (msg) => {
