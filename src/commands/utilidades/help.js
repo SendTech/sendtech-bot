@@ -18,16 +18,16 @@ const help = (msg, client) => {
     **${config.prefix}hola**: Te saludo
     **${config.prefix}avatar**: Muestranos a todos tu hermosa foto
     **${config.prefix}flip**: Tira una moneda al aire
-    **${config.prefix}say [var]**: Haz que yo hable
+    **${config.prefix}say [mensaje]**: Haz que yo hable
     `;
     const utilidades = `
     **${config.prefix}npm**: Busca algun paquete de npm
-    **${config.prefix}wiki [var]**: Busca algo en la wikipedia
+    **${config.prefix}wiki [duda]**: Busca algo en la wikipedia
     **${config.prefix}ping**: Quieres saber que tan rapido soy?
     `
     const server = `
     **${config.prefix}server**: Informacion sobre el server
-    **${config.prefix}inv**: Invita gente
+    **${config.prefix}inv**: Invita gente a sendero tecnologico
     **${config.prefix}sug [sugerencia]**: Sugerencia para el server
     **${config.prefix}ticket**: Abre un canal con los admins
     `

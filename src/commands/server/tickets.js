@@ -52,7 +52,7 @@ client.on('clickButton', (button) => {
             msg.send(embed, closeTicket)
         })
     }
-    else if (button.id === 'close-ticket') {
+    if (button.id === 'close-ticket') {
         button.channel.delete() 
     }
   })
