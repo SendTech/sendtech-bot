@@ -15,11 +15,12 @@ const ticket = (msg, client) => {
     .setColor(config.embedColor)
     msg.channel.send(embed, openTicket)
     
-client.on('clickButton', (button) => {
+client.on('clickButton', async (button) => {
     const everyone = msg.guild.roles.cache.find(rol => rol.name === '@everyone');
     const admins = msg.guild.roles.cache.find(rol => rol.name === '《 ✊ 》Admin');
     const clickButton = button.clicker.user.username.toLowerCase();
     if (button.id === 'open-ticket') {
+        await button.reply.defer()
         msg.guild.channels.create(`${clickButton}-st`, {
             // Permisos para el canal
             permissionOverwrites: [
@@ -54,6 +55,7 @@ client.on('clickButton', (button) => {
     }
     if (button.id === 'close-ticket') {
         button.channel.delete() 
+        await button.reply.defer()
     }
   })
 }

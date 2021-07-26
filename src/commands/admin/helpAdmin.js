@@ -2,7 +2,7 @@ const { MessageEmbed } = require('discord.js')
 const config = require('../../../config.js')
 
 const helpAdmin = (msg) => {
-    if (msg.member.roles.cache.has('790972987779973150')) {
+    if (msg.member.roles.cache.has(config.ID_ADMIN_ROLE)) {
     const admin = `
         **${config.prefix}delete**: Elimina el canal
         **${config.prefix}lock**: mutea el canal

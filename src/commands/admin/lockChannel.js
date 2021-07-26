@@ -1,5 +1,5 @@
 const { MessageEmbed } = require('discord.js')
-const config = require('../../../config')
+const config = require('../../../config.js')
 
 const lockChannel = (msg) => {
     if(!msg.guild.me.permissionsIn(msg.channel).has('MANAGE_CHANNELS')) {
@@ -17,7 +17,7 @@ const lockChannel = (msg) => {
     }
     else {
         const everyone = msg.guild.roles.cache.find(rol => rol.name === '@everyone');
-    const admins = msg.guild.roles.cache.find(rol => rol.name === '《 ✊ 》Admin');
+    const admins = msg.guild.roles.cache.get(config.ID_ADMIN_ROLE);
         msg.channel.edit({
             permissionOverwrites: [
                 {
@@ -25,15 +25,15 @@ const lockChannel = (msg) => {
                     deny: ['SEND_MESSAGES']
                 },
                 {
-                    id: admins.id,  
+                    id: admins,
                     allow: ['VIEW_CHANNEL', 'SEND_MESSAGES']
                 }
             ]
     })
-    const embed = new MessageEmbed()
-        .setColor(config.embedColor)
-        .setTitle('Canal Bloqueado')
-    msg.channel.send(embed)
+        const embed = new MessageEmbed()
+            .setColor(config.embedColor)
+            .setTitle('Canal Bloqueado')
+        msg.channel.send(embed)
     }
 }
 

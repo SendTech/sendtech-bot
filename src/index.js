@@ -14,7 +14,6 @@ const invitation = require('./commands/server/inv.js');
 const suggest = require('./commands/server/suggest.js');
 const ticket = require('./commands/server/tickets.js');
 const server = require('./commands/server/server.js');
-const autorole = require('./commands/server/autorole.js');
 // Utilidades
 const help = require('./commands/utilidades/help.js');
 const npm = require('./commands/utilidades/npm.js');
@@ -27,6 +26,7 @@ const deleteChannel = require('./commands/admin/deleteChannel.js');
 const lockChannel = require('./commands/admin/lockChannel.js');
 const unlockChannel = require('./commands/admin/unlockChannel.js');
 const helpAdmin = require('./commands/admin/helpAdmin.js');
+const autorole = require('./commands/admin/autorole.js');
 
 // El intents le da permiso para dar roles y dar la bienvenida
 const client = new Client({ ws: { intents: 32767 } })
@@ -81,7 +81,7 @@ client.on('message', (msg) => {
           url(msg, args)
           break
         case 'avatar':
-          avatar(msg)
+          avatar(msg, args)
           break
         case 'suggest':
         case 'sug':

@@ -32,8 +32,6 @@ const invitation = (msg, client) => {
 
   client.on('clickButton', async (button) => {
     if (button.id === copyUrlBtnId) {
-      console.log(`Ejecutando ${button.id}`)
-      console.log(button.guild)
       clipboardy.writeSync(config.serverUrl)
     }
 
