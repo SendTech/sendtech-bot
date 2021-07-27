@@ -15,22 +15,25 @@ const suggest = require('./commands/server/suggest.js');
 const ticket = require('./commands/server/tickets.js');
 const server = require('./commands/server/server.js');
 // Utilidades
-const help = require('./commands/utilidades/help.js');
+const help = require('./commands/server/help.js');
 const npm = require('./commands/utilidades/npm.js');
 const pingPong = require('./commands/utilidades/ping');
 const url = require('./commands/utilidades/URLcutter.js');
 const wiki = require('./commands/utilidades/wiki.js');
+const userInfo = require('./commands/utilidades/user-info.js');
+const copyLetter = require('./commands/utilidades/ñ.js');
+
 // admin
 const renameChannel = require('./commands/admin/renameChannel.js');
 const deleteChannel = require('./commands/admin/deleteChannel.js');
 const lockChannel = require('./commands/admin/lockChannel.js');
 const unlockChannel = require('./commands/admin/unlockChannel.js');
-const helpAdmin = require('./commands/admin/helpAdmin.js');
 const autorole = require('./commands/admin/autorole.js');
 
 // El intents le da permiso para dar roles y dar la bienvenida
 const client = new Client({ ws: { intents: 32767 } })
 const welcomeEmbed = require('./utils/welcomeEmbed');
+const { Button } = require('semantic-ui-react');
 require('discord-buttons')(client)
 
 // Hace algo cuando el bot esta online
@@ -41,15 +44,15 @@ client.on('ready', () => {
 })
 
 client.on('guildMemberAdd', (member) => {
-  const channelWelcome = member.guild.channels.cache.get('864258272176242732')
+  const channelWelcome = member.guild.channels.cache.get('790999067060600852')
   const channelCount = member.guild.channels.cache.get('868511890245058600')
   // add Rol Member
-  member.roles.add('790977106698960918')
+  member.roles.add(config.ID_MEMBER_ROLE)
   // Msg Welcome user
-  const welcomeCanvas = welcomeEmbed()
-  channelWelcome.send(welcomeCanvas).then(msg => msg.react('👋'))
+  const welcomeMessage = welcomeEmbed(member)
+  channelWelcome.send(welcomeMessage).then(msg => msg.react('👋'))
   // Channel edit
-  channelCount.setName(`Somos ${member.guild.memberCount} Devs`)
+  channelCount.setName(`Somos ${member.guild.memberCount} Developers`)
 })
 
 client.on('message', (msg) => {
@@ -66,15 +69,21 @@ client.on('message', (msg) => {
     try {
       switch (command) {
         case 'ping':
-          pingPong(msg)
+          pingPong(msg, client)
+          break
+        case 'user-info':
+          userInfo(msg, args)
           break
         case 'autorole':
           autorole(msg, client)
           break
+        case 'n':
+          copyLetter(msg, client)
+          break
         case 'npm':
           npm(msg, args)
           break 
-        case 'server':
+        case 'server-info':
           server(msg)
           break
         case 'url':
@@ -111,9 +120,6 @@ client.on('message', (msg) => {
           break
         case 'rename':
           renameChannel(msg, args)
-          break
-        case 'helpst':
-          helpAdmin(msg)
           break
         case 'delete':
           deleteChannel(msg)

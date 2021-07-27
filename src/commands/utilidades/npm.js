@@ -3,7 +3,8 @@ const config = require('../../../config.js')
 const fetch = require('node-fetch')
 
 const npm = async (msg, args) => {
-    const response = await fetch(`https://api.npms.io/v2/package/${args}`)
+    const finalArg = args.join('-')
+    const response = await fetch(`https://api.npms.io/v2/package/${finalArg}`)
     const data = await response.json()
     if (
       data !== null &&
@@ -45,7 +46,7 @@ const npm = async (msg, args) => {
         )
         msg.channel.send(embed)
     } else if (data.code === 'NOT_FOUND' || data.code === 'INVALID_PARAMETER') {
-      const solution = 'Revisa que hayas escrito bien el nombre del paquete o si pusiste un espacio cambialo por un **-**';
+      const solution = 'Revisa que hayas escrito bien el nombre del paquete, porque escribiste';
       const embed = new MessageEmbed()
       .setColor(config.embedColor)
       .setTitle('Modulo no encontrado')
@@ -53,6 +54,7 @@ const npm = async (msg, args) => {
         'npm',
         'https://pbs.twimg.com/profile_images/1285630920263966721/Uk6O1QGC_400x400.jpg'
       )
+      .addField('📦 Package buscado:',finalArg)
       .setImage('https://images-ext-1.discordapp.net/external/RBrBPOqtBk1IeYXMDmiKjkj-QYQvWj0IVmB0-9Q8Y5A/https/media.giphy.com/media/iJCo9daAP0xugHhhfb/giphy.gif')
       .setDescription(solution)
       msg.channel.send(embed);

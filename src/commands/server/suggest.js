@@ -7,7 +7,7 @@ const config = require('../../../config.js')
  * @returns {void} void
  */
 const suggest = (msg, args, command) => {
-  const channelSuggest = msg.guild.channels.cache.get(config.ID_SUGGEST_CHANNEL)
+  const channelSuggest = msg.guild.channels.cache.get('869213442567991307')
   if (command === 'suggest' || command === 'sug') {
     if (!args[0]) return msg.channel.send(`El comando es ${config.prefix}sug [msg]`)
 
@@ -23,11 +23,11 @@ const suggest = (msg, args, command) => {
       .setDescription(args.join(' '))
       .setColor(config.embedColor)
       .setFooter(`${config.prefix}sug [sugerencia]`)
+      .setTimestamp()
     channelSuggest.send(embedSuggest).then((msg) => {
-      msg.react('👍').then(() => {
-        msg.react('👎')
+      msg.react('👍')
+      msg.react('👎')
       })
-    })
   }
 }
 

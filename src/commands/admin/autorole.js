@@ -10,7 +10,7 @@ const autorole = (msg, client) => {
         return msg.channel.send(embed)
     }
 
-    if(!msg.member.roles.cache.has(config.ID_ADMIN_ROLE)) {
+    if(!msg.member.roles.cache.has(config.ID_ADMIN_ROLE) && !msg.member.permissionsIn(msg.channel).has('MANAGE_CHANNELS')) {
         const embed = new MessageEmbed()
         .setColor(config.embedColor)
         .setTitle('Perdon, pero no tienes permisos')
