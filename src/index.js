@@ -5,10 +5,11 @@ const presence = require('./utils/presence.js')
 // Entretenimiento
 const gif = require('./commands/entretenimiento/gif');
 const hola = require('./commands/entretenimiento/hola');
+const adios = require('./commands/entretenimiento/adios');
 const ball = require('./commands/entretenimiento/8ball.js')
-const avatar = require('./commands/entretenimiento/avatar.js');
 const flipCoin = require('./commands/entretenimiento/flipCoin.js');
 const say = require('./commands/entretenimiento/say.js');
+const youtube = require('./commands/entretenimiento/say.js');
 // Server
 const invitation = require('./commands/server/inv.js');
 const suggest = require('./commands/server/suggest.js');
@@ -18,11 +19,14 @@ const server = require('./commands/server/server.js');
 const help = require('./commands/server/help.js');
 const npm = require('./commands/utilidades/npm.js');
 const pingPong = require('./commands/utilidades/ping');
+const avatar = require('./commands/utilidades/avatar.js');
 const url = require('./commands/utilidades/URLcutter.js');
 const wiki = require('./commands/utilidades/wiki.js');
 const userInfo = require('./commands/utilidades/user-info.js');
-const copyLetter = require('./commands/utilidades/ñ.js');
-
+const createEmbed = require('./commands/utilidades/embed.js');
+const createPoll = require('./commands/utilidades/poll.js');
+const apodo = require('./commands/utilidades/apodo.js');
+const serverAvatar = require('./commands/utilidades/server-avatar.js');
 // admin
 const renameChannel = require('./commands/admin/renameChannel.js');
 const deleteChannel = require('./commands/admin/deleteChannel.js');
@@ -33,7 +37,6 @@ const autorole = require('./commands/admin/autorole.js');
 // El intents le da permiso para dar roles y dar la bienvenida
 const client = new Client({ ws: { intents: 32767 } })
 const welcomeEmbed = require('./utils/welcomeEmbed');
-const { Button } = require('semantic-ui-react');
 require('discord-buttons')(client)
 
 // Hace algo cuando el bot esta online
@@ -48,11 +51,13 @@ client.on('guildMemberAdd', (member) => {
   const channelCount = member.guild.channels.cache.get('868511890245058600')
   // add Rol Member
   member.roles.add(config.ID_MEMBER_ROLE)
+  // edit nickname
+  member.setNickname(`${member.user.username} ѕт`)
+  // Channel edit
+  channelCount.setName(`Somos ${member.guild.memberCount} Developers`)
   // Msg Welcome user
   const welcomeMessage = welcomeEmbed(member)
   channelWelcome.send(welcomeMessage).then(msg => msg.react('👋'))
-  // Channel edit
-  channelCount.setName(`Somos ${member.guild.memberCount} Developers`)
 })
 
 client.on('message', (msg) => {
@@ -63,7 +68,7 @@ client.on('message', (msg) => {
   const msgContent = msg.content
 
   if (msgContent.startsWith(config.prefix)) {
-    const args = msgContent.toLocaleLowerCase().slice(config.prefix.length).trim().split(/ +/g)
+    const args = msgContent.slice(config.prefix.length).trim().split(/ +/g)
     const command = args.shift().toLowerCase()
 
     try {
@@ -74,15 +79,24 @@ client.on('message', (msg) => {
         case 'user-info':
           userInfo(msg, args)
           break
+        case 'poll':
+          createPoll(msg, args)
+          break
+        case 'server-avatar':
+          serverAvatar(msg)
+          break
         case 'autorole':
           autorole(msg, client)
           break
-        case 'n':
-          copyLetter(msg, client)
+        case 'embed':
+          createEmbed(msg, args)
           break
         case 'npm':
           npm(msg, args)
           break 
+          case 'apodo':
+            apodo(msg, args)
+          break
         case 'server-info':
           server(msg)
           break
@@ -101,6 +115,9 @@ client.on('message', (msg) => {
           break
         case 'hola' || 'Hola':
           hola(msg)
+          break
+        case 'adios':
+          adios(msg)
           break
         case 'help':
           help(msg, client)

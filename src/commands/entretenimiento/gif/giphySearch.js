@@ -21,7 +21,7 @@ const giphySearch = async (msg, args, rating) => {
     const randomIdNumber = getRandomNumber(giphyData.data.length);
     const gifUrl = giphyData.data[randomIdNumber].images.original.url
     
-    const reactions = ['🎭','🎪','🏆','🎲','🃏','😛','😁','🤡','🤣','😂','😆','😅'];
+    const reactions = ['<:tomato:869594638716141578>','<:shrimp:869594637776592958>','<:Fire:869583736352702494>','<:fun_cat:869591958937538640>'];
       const randomReaction = reactions[Math.floor(Math.random() * reactions.length)];
     const embed = new MessageEmbed()
     .setImage(gifUrl)

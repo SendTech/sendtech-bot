@@ -2,37 +2,37 @@ const { MessageEmbed } = require('discord.js')
 const config = require('../../../config')
 
 const unlockChannel = (msg) => {
-    if(!msg.guild.me.permissionsIn(msg.channel).has('MANAGE_CHANNELS')){
+    if(!msg.guild.me.permissionsIn(msg.channel).has('MANAGE_CHANNELS')) {
         const embed = new MessageEmbed()
-        .setTitle('Perdon, pero no tengo permisos para esto')
+        .setTitle('<:warning:869596475938713620> Perdon, pero no tengo permisos para esto')
         .setColor(config.embedColor)
-        return msg.channel.send(embed)
+        msg.channel.send(embed)
     }
 
     if(!msg.member.permissionsIn(msg.channel).has('MANAGE_CHANNELS')) {
         const embed = new MessageEmbed()
         .setColor(config.embedColor)
-        .setTitle('Perdon, pero no tienes permisos')
-        return msg.channel.send(embed)
+        .setTitle('<:warning:869596475938713620> Perdon, pero no tienes permisos')
+        msg.channel.send(embed)
     }
     else {
-        const everyone = msg.guild.roles.cache.find(rol => rol.name === '@everyone');
+        const everyone = msg.guild.roles.everyone;
         const admins = msg.guild.roles.cache.get(config.ID_ADMIN_ROLE);
         msg.channel.edit({
             permissionOverwrites: [
                 {
                     id: everyone.id,
-                    allow: ['VIEW_CHANNEL', 'SEND_MESSAGES']
+                    allow: ['SEND_MESSAGES']
                 },
                 {
-                    id: admins,  
+                    id: admins,
                     allow: ['VIEW_CHANNEL', 'SEND_MESSAGES']
                 }
             ]
     })
     const embed = new MessageEmbed()
         .setColor(config.embedColor)
-        .setTitle('Canal Desbloqueado')
+        .setTitle('<:warning:869596475938713620> Canal Desbloqueado')
     msg.channel.send(embed)
     }
 }

@@ -8,7 +8,7 @@ const ball = (msg, args) => {
 
     const embed = new MessageEmbed()
         .setAuthor(msg.author.username, msg.author.displayAvatarURL())
-        .setTitle('Respondiendo a tu pregunta!')
+        .setTitle('<:question:869584600626790430> Respondiendo a tu pregunta!')
         .setDescription(`Mi respuesta es: **${rptFinal}**`)
         .setColor(config.embedColor)
         msg.channel.send(embed);

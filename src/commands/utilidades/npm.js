@@ -15,21 +15,21 @@ const npm = async (msg, args) => {
       const embed = new MessageEmbed()
         .setAuthor('npm', 'https://pbs.twimg.com/profile_images/1285630920263966721/Uk6O1QGC_400x400.jpg'
         )
-        .setTitle(`📦 Package: ${data.collected.metadata.name}`)
+        .setTitle(`<:tag:869590351994835014>  ${data.collected.metadata.name}`)
         .setURL(data.collected.github?.homepage !== undefined
           ? data.collected.github?.homepage
           : data.collected.metadata.links?.homepage)
         .addFields(
           {
-            name: 'Description:',
+            name: '<:IDs:869576071132110959> Description:',
             value: `${data.collected.metadata.description}`,
           },
           {
-            name: 'Version:',
+            name: '<:right_arrow:869591958258069564> Version:',
             value: `${data.collected.metadata.version}`,
           },
           {
-            name: '📜 License:',
+            name: '<:sheet:869591957737975828> License:',
             value: `${data.collected.metadata.license}`,
           }
         )
@@ -54,7 +54,7 @@ const npm = async (msg, args) => {
         'npm',
         'https://pbs.twimg.com/profile_images/1285630920263966721/Uk6O1QGC_400x400.jpg'
       )
-      .addField('📦 Package buscado:',finalArg)
+      .addField('<:tag:869590351994835014> Package buscado:',finalArg)
       .setImage('https://images-ext-1.discordapp.net/external/RBrBPOqtBk1IeYXMDmiKjkj-QYQvWj0IVmB0-9Q8Y5A/https/media.giphy.com/media/iJCo9daAP0xugHhhfb/giphy.gif')
       .setDescription(solution)
       msg.channel.send(embed);

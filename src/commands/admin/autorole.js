@@ -5,7 +5,7 @@ const config = require('../../../config')
 const autorole = (msg, client) => {
     if(!msg.guild.me.permissionsIn(msg.channel).has('MANAGE_ROLES')){
         const embed = new MessageEmbed()
-        .setTitle('Perdon, pero no tengo permisos para esto')
+        .setTitle('<:warning:869596475938713620> Perdon, pero no tengo permisos para esto')
         .setColor(config.embedColor)
         return msg.channel.send(embed)
     }
@@ -13,13 +13,14 @@ const autorole = (msg, client) => {
     if(!msg.member.roles.cache.has(config.ID_ADMIN_ROLE) && !msg.member.permissionsIn(msg.channel).has('MANAGE_CHANNELS')) {
         const embed = new MessageEmbed()
         .setColor(config.embedColor)
-        .setTitle('Perdon, pero no tienes permisos')
+        .setTitle('<:warning:869596475938713620> Perdon, pero no tienes permisos')
         return msg.channel.send(embed)
     }
 
     else {
+    const role = msg.mentions.roles.first();
     const embed = new MessageEmbed()
-        .setTitle('Verificate')
+        .setTitle('<:check:869577155758145536> Verificate')
         .setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae libero non nulla mattis pretium ut vel mi. Pellentesque tincidunt nunc in odio dictum hendrerit. Etiam porta vestibulum sagittis. Sed auctor orci ut purus consectetur, at cursus metus gravida. Fusce vulputate ligula viverra, consectetur felis non, pharetra ex.')
         .setColor(config.embedColor)
     const addRole = new MessageButton()
@@ -31,10 +32,10 @@ const autorole = (msg, client) => {
 
     client.on('clickButton', async (button) => {
         if (button.id === 'add-role') {
-        const rol = msg.guild.roles.cache.get(config.ID_MEMBER_ROLE)
+        // const rol = msg.guild.roles.cache.get(role.id)
             await button.reply.defer()
             await button.clicker.fetch()
-            button.clicker.member.roles.add(rol);
+            button.clicker.member.roles.add(role.id);
         }
     })
 }

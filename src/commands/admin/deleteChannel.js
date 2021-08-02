@@ -4,7 +4,7 @@ const config = require('../../../config')
 const deleteChannel = (msg) => {
     if(!msg.guild.me.permissionsIn(msg.channel).has('MANAGE_CHANNELS')){
         const embed = new MessageEmbed()
-        .setTitle('Perdon, pero no tengo permisos para esto')
+        .setTitle('<:warning:869596475938713620> Perdon, pero no tengo permisos para esto')
         .setColor(config.embedColor)
         return msg.channel.send(embed)
     }
@@ -12,7 +12,7 @@ const deleteChannel = (msg) => {
     if(!msg.member.permissionsIn(msg.channel).has('MANAGE_CHANNELS')) {
         const embed = new MessageEmbed()
         .setColor(config.embedColor)
-        .setTitle('Perdon, pero no tienes permisos')
+        .setTitle('<:warning:869596475938713620> Perdon, pero no tienes permisos')
         return msg.channel.send(embed)
     }
     else {

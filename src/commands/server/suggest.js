@@ -1,13 +1,8 @@
 const { MessageEmbed } = require('discord.js')
 const config = require('../../../config.js')
 
-/**
- * @function suggest
- * @param {Message} msg The message object
- * @returns {void} void
- */
 const suggest = (msg, args, command) => {
-  const channelSuggest = msg.guild.channels.cache.get('869213442567991307')
+  const channelSuggest = msg.guild.channels.cache.get(config.ID_SUGGEST_CHANNEL)
   if (command === 'suggest' || command === 'sug') {
     if (!args[0]) return msg.channel.send(`El comando es ${config.prefix}sug [msg]`)
 
@@ -19,14 +14,14 @@ const suggest = (msg, args, command) => {
 
     const embedSuggest = new MessageEmbed()
       .setAuthor(msg.author.username, msg.author.displayAvatarURL())
-      .setTitle('Nueva Sugerencia!')
+      .setTitle('<:coffeecup:869573017041268736> Nueva Sugerencia!')
       .setDescription(args.join(' '))
       .setColor(config.embedColor)
       .setFooter(`${config.prefix}sug [sugerencia]`)
       .setTimestamp()
     channelSuggest.send(embedSuggest).then((msg) => {
-      msg.react('👍')
-      msg.react('👎')
+      msg.react('<:check:869577155758145536>')
+      msg.react('<:cancel:869573017452314674>')
       })
   }
 }

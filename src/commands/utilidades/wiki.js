@@ -6,7 +6,6 @@ const sendEmbedError = require('../../utils/sendEmbedError.js')
 const wiki = async (message, args) => {
   if (args === undefined || !args) return message.reply('Escribe el item a buscar') // If Nothing Is Searched
   const wikiQuery = args[0]
-  console.log(wikiQuery)
 
   if (wikiQuery !== undefined) {
     const baseUrl = `https://es.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(

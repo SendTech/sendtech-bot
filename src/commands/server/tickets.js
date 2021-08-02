@@ -11,7 +11,7 @@ const ticket = (msg, client) => {
     .setEmoji('🚪');
     // Configuracion del embed
     const embed = new MessageEmbed()
-    .setTitle('Tienes algo que decirles a los admins')
+    .setTitle('<:people:869573743477927988> Tienes algo que decirles a los admins?')
     .setColor(config.embedColor)
     msg.channel.send(embed, openTicket)
     
@@ -43,7 +43,7 @@ client.on('clickButton', async (button) => {
         .then(msg => {
             // opciones en el ticket
             const embed = new MessageEmbed()
-                .setTitle('Bienvenido al ticket')
+                .setTitle('<:coffeecup:869573017041268736> Bienvenido al ticket')
                 .setColor(config.embedColor)
             const closeTicket = new MessageButton()
                 .setStyle('red')

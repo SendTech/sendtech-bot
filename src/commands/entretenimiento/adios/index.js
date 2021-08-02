@@ -10,17 +10,15 @@ const getRandomNumber = require('../../../utils/getRandomNumber')
  * @param {Message} msg The message object
  * @returns {void} void
  */
-const hola = (msg) => {
-  if (msg.content === `${config.prefix}hola` || msg.content === 'Hola') {
+const adios = (msg) => {
     const palabraFinal = palabras[getRandomNumber(palabras.length)]
 
     const embed = new MessageEmbed()
       .setTitle(palabraFinal)
-      .setDescription('Nota: Estoy Vivo <:fun_cat:869591958937538640> | Por suerte.')
+      .setDescription('<:cancel:869573017452314674> Nota: No quiero que te vayas')
       .setColor(config.embedColor)
 
     msg.channel.send(embed).then((msg) => msg.react('<:coffeecup:869573017041268736>'))
-  }
 }
 
-module.exports = hola
+module.exports = adios

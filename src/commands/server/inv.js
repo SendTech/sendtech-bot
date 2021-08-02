@@ -21,12 +21,12 @@ const invitation = (msg, client) => {
     .setStyle('red')
     .setLabel('Copiar enlace!')
     .setID(copyUrlBtnId)
-    .setEmoji('⚡')
+    .setEmoji('🔗')
 
   const row = new MessageActionRow().addComponents(copyUrlBtn, sendToServerBtn)
   const embed = new MessageEmbed()
   .setTitle('Invita a tus amigos al servidor')
-  .setFooter(`📌 ${config.serverUrl}`)
+  .setDescription(`<:link:869590950895321159>  ${config.serverUrl}`)
   .setColor(config.embedColor)
   msg.channel.send(embed, row)
 
