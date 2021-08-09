@@ -18,7 +18,7 @@ const adios = (msg) => {
       .setDescription('<:cancel:869573017452314674> Nota: No quiero que te vayas')
       .setColor(config.embedColor)
 
-    msg.channel.send(embed).then((msg) => msg.react('<:coffeecup:869573017041268736>'))
+    msg.channel.send({embeds:[embed]}).then((msg) => msg.react('<:coffeecup:869573017041268736>'))
 }
 
 module.exports = adios

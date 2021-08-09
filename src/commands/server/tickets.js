@@ -1,28 +1,48 @@
-const { MessageEmbed } = require('discord.js')
-const { MessageButton } = require('discord-buttons')
+const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js')
 const config = require('../../../config')
 
 const ticket = (msg, client) => {
-  const openTicket = new MessageButton()
-    // Configuracion del ticket
-    .setStyle('red')
-    .setLabel('Abre ticket')
-    .setID('open-ticket')
-    .setEmoji('🚪');
-    // Configuracion del embed
+    const addTicket = new MessageActionRow()
+    .addComponents(
+        new MessageButton()
+        .setStyle('SECONDARY')
+        .setLabel('Abre ticket')
+        .setCustomId('open-ticket')
+        .setEmoji('<:paperplane:872861917708951582>')
+    )
+    const addedTicket = new MessageActionRow()
+    .addComponents(
+        new MessageButton()
+        .setStyle('SUCCESS')
+        .setLabel('Ticket Abierto')
+        .setCustomId('added-ticket')
+        .setEmoji('<:check:869577155758145536>')
+        .setDisabled(true)
+    )
+    const closeTicket = new MessageActionRow()
+    .addComponents(
+        new MessageButton()
+        .setStyle('SECONDARY')
+        .setLabel('Cierra ticket')
+        .setCustomId('close-ticket')
+        .setEmoji('<:cancel:869573017452314674>')
+    )
+
     const embed = new MessageEmbed()
     .setTitle('<:people:869573743477927988> Tienes algo que decirles a los admins?')
     .setColor(config.embedColor)
-    msg.channel.send(embed, openTicket)
-    
-client.on('clickButton', async (button) => {
+    msg.channel.send({ embeds: [embed], components: [addTicket]});
+
+client.on('interactionCreate', async (button) => {
     const everyone = msg.guild.roles.cache.find(rol => rol.name === '@everyone');
     const admins = msg.guild.roles.cache.find(rol => rol.name === '《 ✊ 》Admin');
-    const clickButton = button.clicker.user.username.toLowerCase();
-    if (button.id === 'open-ticket') {
-        await button.reply.defer()
-        msg.guild.channels.create(`${clickButton}-st`, {
-            // Permisos para el canal
+    // console.log(button.ButtonInteraction)
+    // const clickButton = button.clicker.user.username.toLowerCase();
+
+    if (button.customId === 'open-ticket') {
+        await button.update({ components: [addedTicket] });
+        // msg.guild.channels.create(`${clickButton}-st`, {
+        msg.guild.channels.create('st', {
             permissionOverwrites: [
                 {
                     id: everyone.id,
@@ -36,28 +56,19 @@ client.on('clickButton', async (button) => {
                     id: msg.author.id,
                     allow: ['VIEW_CHANNEL', 'SEND_MESSAGES']
                 }
-            ], 
-            // Que aparezca en una categoria padre
+            ],
             parent: '859459585689124865'
-        })
-        .then(msg => {
-            // opciones en el ticket
+        }).then(msg => {
             const embed = new MessageEmbed()
                 .setTitle('<:coffeecup:869573017041268736> Bienvenido al ticket')
                 .setColor(config.embedColor)
-            const closeTicket = new MessageButton()
-                .setStyle('red')
-                .setLabel('Cierra ticket')
-                .setID('close-ticket')
-                .setEmoji('🔒')
-            msg.send(embed, closeTicket)
+            msg.send({ embeds: [embed], components: [closeTicket]});
         })
     }
-    if (button.id === 'close-ticket') {
-        button.channel.delete() 
-        await button.reply.defer()
-    }
-  })
+    // if (button.customId === 'close-ticket') {
+    //     msg.channel.delete()
+    // }
+})
 }
 
 module.exports = ticket

@@ -1,5 +1,3 @@
-const { MessageEmbed } = require('discord.js')
-const config = require('../../../../config')
 const randomSearch = require('./randomSearch.js')
 const giphySearch = require('./giphySearch.js')
 

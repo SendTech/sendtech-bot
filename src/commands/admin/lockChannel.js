@@ -6,14 +6,14 @@ const lockChannel = (msg) => {
         const embed = new MessageEmbed()
         .setTitle('<:warning:869596475938713620> Perdon, pero no tengo permisos para esto')
         .setColor(config.embedColor)
-        msg.channel.send(embed)
+        msg.channel.send({embeds: [embed]})
     }
 
     else if(!msg.member.permissionsIn(msg.channel).has('MANAGE_CHANNELS')) {
         const embed = new MessageEmbed()
         .setColor(config.embedColor)
         .setTitle('<:warning:869596475938713620> Perdon, pero no tienes permisos')
-        msg.channel.send(embed)
+        msg.channel.send({embeds: [embed]})
     }
     else {
         const everyone = msg.guild.roles.cache.find(rol => rol.name === '@everyone');
@@ -33,7 +33,7 @@ const lockChannel = (msg) => {
         const embed = new MessageEmbed()
             .setColor(config.embedColor)
             .setTitle('<:cancel:869573017452314674> Canal Bloqueado')
-        msg.channel.send(embed)
+        msg.channel.send({embeds: [embed]})
     }
 }
 

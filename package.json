@@ -18,12 +18,12 @@
   "license": "MIT",
   "dependencies": {
     "clipboardy": "^2.3.0",
-    "discord-buttons": "^4.0.0",
     "discord-canvas": "^1.4.1",
     "discord-together": "^1.1.53",
     "discord.js": "^13.0.0-dev.t1627949059.35fa3b3",
     "dotenv": "^10.0.0",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "node.js": "^0.0.1-security"
   },
   "devDependencies": {
     "eslint": "^7.30.0",

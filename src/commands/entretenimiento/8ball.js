@@ -11,14 +11,14 @@ const ball = (msg, args) => {
         .setTitle('<:question:869584600626790430> Respondiendo a tu pregunta!')
         .setDescription(`Mi respuesta es: **${rptFinal}**`)
         .setColor(config.embedColor)
-        msg.channel.send(embed);
+        msg.channel.send({embeds: [embed]});
     }
     if (args.length === 0 || args === undefined || !args){
         const embed = new MessageEmbed()
         .setTitle(`El comando es ${config.prefix}8ball [pregunta] no ${config.prefix}8ball`)
         .setImage('https://media.giphy.com/media/eKrgVyZ7zLvJrgZNZn/giphy.gif')
         .setColor(config.embedColor)
-        msg.channel.send(embed)
+        msg.channel.send({embeds: [embed]});
     }
 }
 

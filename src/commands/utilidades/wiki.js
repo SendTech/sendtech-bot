@@ -47,7 +47,7 @@ const wiki = async (message, args) => {
           .setImage(response.thumbnail.source)
           .setURL(response.content_urls.desktop.page)
           .setDescription(response.extract)
-        message.channel.send(embed)
+        message.channel.send({ embeds: [embed] })
       }
     } catch {
       return sendEmbedError({

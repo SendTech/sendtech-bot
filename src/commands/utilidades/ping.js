@@ -7,7 +7,7 @@ const pingPong = (msg, client) => {
     const embed = new MessageEmbed()
     .setTitle(`<:entertainment_button:869568714436120576> Pong | ${ping}ms`)
     .setColor(config.embedColor)
-    msg.channel.send(embed)
+    msg.channel.send({ embeds: [embed] });
 }
 
 module.exports = pingPong

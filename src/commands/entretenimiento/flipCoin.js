@@ -12,7 +12,7 @@ const random = coin[getRandomNumber(coin.length)]
     const embed = new MessageEmbed()
         .setImage(random)
         .setColor(config.embedColor)
-    msg.channel.send(embed)
+    msg.channel.send({embeds:[embed]})
 }
 
 module.exports = flipCoin

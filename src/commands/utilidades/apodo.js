@@ -6,7 +6,7 @@ const apodo = async (msg, args) => {
     const embed = new MessageEmbed()
     .setTitle('Apodo cambiado <:check:869577155758145536>')
     .setColor(config.embedColor)
-    await msg.channel.send(embed)
+    await msg.channel.send({ embeds: [embed] });
 }
 
 module.exports = apodo

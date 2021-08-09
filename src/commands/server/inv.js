@@ -1,5 +1,4 @@
-const { MessageEmbed } = require('discord.js')
-const { MessageButton, MessageActionRow } = require('discord-buttons')
+const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js')
 const clipboardy = require('clipboardy')
 const config = require('../../../config')
 
@@ -9,33 +8,33 @@ const config = require('../../../config')
  * @param {Client} client -> Discord Client Object
  */
 const invitation = (msg, client) => {
-  const copyUrlBtnId = 'copyUrlBtnId'
-
-  const sendToServerBtn = new MessageButton()
-    .setURL(config.serverUrl)
-    .setStyle('url')
-    .setLabel('Vayamos al servidor!')
-    .setEmoji('🌟')
-
-  const copyUrlBtn = new MessageButton()
-    .setStyle('red')
+  const row = new MessageActionRow()
+  .addComponents(
+    new MessageButton()
     .setLabel('Copiar enlace!')
-    .setID(copyUrlBtnId)
-    .setEmoji('🔗')
+      .setStyle('SECONDARY')
+      .setCustomId('copyUrlBtnId')
+      .setEmoji('<:link:869590950895321159>')
+  )
+  .addComponents(
+    new MessageButton()
+    .setLabel('Vayamos al servidor!')
+      .setStyle('LINK')
+      .setEmoji('<:utilities_button:869569323725893633>')
+      .setURL(config.serverUrl)
+  )
 
-  const row = new MessageActionRow().addComponents(copyUrlBtn, sendToServerBtn)
   const embed = new MessageEmbed()
   .setTitle('Invita a tus amigos al servidor')
-  .setDescription(`<:link:869590950895321159>  ${config.serverUrl}`)
+  .setDescription(config.serverUrl)
   .setColor(config.embedColor)
-  msg.channel.send(embed, row)
+  
+  msg.channel.send({embeds: [embed], components: [row]})
 
-  client.on('clickButton', async (button) => {
-    if (button.id === copyUrlBtnId) {
+  client.on('interactionCreate', async (button) => {
+    if (button.customId === 'copyUrlBtnId') {
       clipboardy.writeSync(config.serverUrl)
     }
-
-    await button.reply.defer()
   })
 }
 

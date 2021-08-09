@@ -1,14 +1,16 @@
 const { MessageEmbed } = require('discord.js')
 const config = require('../../../config.js')
 
-const server = (msg) => {
+const server =  async (msg) => {
     const server = msg.guild;
+    const owner = await server.fetchOwner()
+    console.log(owner)
 const embed = new MessageEmbed()
     .setAuthor(server.name, server.iconURL())
     .addFields(
         {
             name:'<:admin_button:869567092003864696> Creador del Server', 
-            value: '```' + server.owner.user.tag + '```', 
+            value: '```' + owner.user.tag + '```', 
             inline: true
         },
         {
@@ -58,7 +60,7 @@ const embed = new MessageEmbed()
     )
     .setTimestamp()
     .setColor(config.embedColor)
-    msg.channel.send(embed);
+    msg.channel.send({embeds: [embed]});
 }
 
 module.exports = server

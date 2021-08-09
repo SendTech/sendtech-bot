@@ -1,7 +1,7 @@
 const fetch = require('node-fetch')
 
 const url = async (msg, args) => {
-    const response = new URLSearchParams(`https://api-ssl.bitly.com/v4/shorten/=${args}`)
+    const response = new fetch(URLSearchParams(`https://api-ssl.bitly.com/v4/shorten/=${args}`))
     console.log(response)
     fetch( {
         // method: 'POST',

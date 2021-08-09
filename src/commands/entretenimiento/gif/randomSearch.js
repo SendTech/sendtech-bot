@@ -22,13 +22,13 @@ const randomSearch = async (msg, rating) => {
   const embed = new MessageEmbed()
     .setImage(gifUrl)
     .setColor(config.embedColor)
-  msg.channel.send(embed);
+    msg.channel.send({embeds: [embed]});
 }
   catch (err) {
   const embed = new MessageEmbed()
     .setTitle('Error inesperado')
     .setColor(config.embedColor)
-  return msg.channel.send(embed)
+  return msg.channel.send({embeds: [embed]});
 }
 } 
 module.exports = randomSearch

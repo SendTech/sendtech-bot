@@ -44,9 +44,9 @@ const npm = async (msg, args) => {
         .setThumbnail(
           'https://media.giphy.com/media/gHnBLyeYE6hboT3t3o/giphy.gif'
         )
-        msg.channel.send(embed)
+        msg.channel.send({ embeds: [embed] })
     } else if (data.code === 'NOT_FOUND' || data.code === 'INVALID_PARAMETER') {
-      const solution = 'Revisa que hayas escrito bien el nombre del paquete, porque escribiste';
+      const solution = 'Revisa que hayas escrito bien el nombre del paquete';
       const embed = new MessageEmbed()
       .setColor(config.embedColor)
       .setTitle('Modulo no encontrado')
@@ -57,7 +57,7 @@ const npm = async (msg, args) => {
       .addField('<:tag:869590351994835014> Package buscado:',finalArg)
       .setImage('https://images-ext-1.discordapp.net/external/RBrBPOqtBk1IeYXMDmiKjkj-QYQvWj0IVmB0-9Q8Y5A/https/media.giphy.com/media/iJCo9daAP0xugHhhfb/giphy.gif')
       .setDescription(solution)
-      msg.channel.send(embed);
+      msg.channel.send({ embeds: [embed] });
     }
     }
 

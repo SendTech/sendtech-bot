@@ -19,7 +19,7 @@ const hola = (msg) => {
       .setDescription('Nota: Estoy Vivo <:fun_cat:869591958937538640> | Por suerte.')
       .setColor(config.embedColor)
 
-    msg.channel.send(embed).then((msg) => msg.react('<:coffeecup:869573017041268736>'))
+      msg.channel.send({embeds:[embed]}).then((msg) => msg.react('<:coffeecup:869573017041268736>'))
   }
 }
 

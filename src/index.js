@@ -1,4 +1,4 @@
-const { Client } = require('discord.js');
+const { Client, Intents } = require('discord.js');
 const config = require('../config')
 const presence = require('./utils/presence.js')
 // Commands
@@ -9,17 +9,17 @@ const adios = require('./commands/entretenimiento/adios');
 const ball = require('./commands/entretenimiento/8ball.js')
 const flipCoin = require('./commands/entretenimiento/flipCoin.js');
 const say = require('./commands/entretenimiento/say.js');
-// const youtube = require('./commands/entretenimiento/youtube.js');
+const youtube = require('./commands/entretenimiento/youtube.js');
 // Server
-// const invitation = require('./commands/server/inv.js');
+const invitation = require('./commands/server/inv.js');
 const suggest = require('./commands/server/suggest.js');
-// const ticket = require('./commands/server/tickets.js');
+const ticket = require('./commands/server/tickets.js');
 const server = require('./commands/server/server.js');
 // Utilidades
-// const help = require('./commands/server/help.js');
+const help = require('./commands/server/help.js');
 const npm = require('./commands/utilidades/npm.js');
 const pingPong = require('./commands/utilidades/ping');
-// const avatar = require('./commands/utilidades/avatar.js');
+const avatar = require('./commands/utilidades/avatar.js');
 const url = require('./commands/utilidades/URLcutter.js');
 const wiki = require('./commands/utilidades/wiki.js');
 const userInfo = require('./commands/utilidades/user-info.js');
@@ -32,12 +32,11 @@ const renameChannel = require('./commands/admin/renameChannel.js');
 const deleteChannel = require('./commands/admin/deleteChannel.js');
 const lockChannel = require('./commands/admin/lockChannel.js');
 const unlockChannel = require('./commands/admin/unlockChannel.js');
-// const autorole = require('./commands/admin/autorole.js');
+const autorole = require('./commands/admin/autorole.js');
 
 // El intents le da permiso para dar roles y dar la bienvenida
-const client = new Client({ intents: [Intents.ALL] })
+const client = new Client({ intents: 32767})
 const welcomeEmbed = require('./utils/welcomeEmbed');
-require('discord-buttons')(client)
 
 // Hace algo cuando el bot esta online
 client.on('ready', () => {
@@ -57,10 +56,10 @@ client.on('guildMemberAdd', (member) => {
   channelCount.setName(`Somos ${member.guild.memberCount} Developers`)
   // Msg Welcome user
   const welcomeMessage = welcomeEmbed(member)
-  channelWelcome.send(welcomeMessage).then(msg => msg.react('👋'))
+  channelWelcome.send({embeds: [welcomeMessage]}).then(msg => msg.react('👋'))
 })
 
-client.on('message', (msg) => {
+client.on('messageCreate', (msg) => {
   // Valida que los mensajes no sean del bot
   if (msg.author === client.user) return
   if (msg.author.bot) return
@@ -82,15 +81,15 @@ client.on('message', (msg) => {
         case 'poll':
           createPoll(msg, args)
           break
-        // case 'youtube':
-        //   youtube(msg)
-        // break
+        case 'youtube':
+          youtube(msg)
+        break
         case 'server-avatar':
           serverAvatar(msg)
           break
-        // case 'autorole':
-        //   autorole(msg, client)
-        //   break
+        case 'autorole':
+          autorole(msg, client)
+          break
         case 'embed':
           createEmbed(msg, args)
           break
@@ -106,9 +105,9 @@ client.on('message', (msg) => {
         case 'url':
           url(msg, args)
           break
-        // case 'avatar':
-        //   avatar(msg, args)
-        //   break
+        case 'avatar':
+          avatar(msg)
+          break
         case 'suggest':
         case 'sug':
           suggest(msg, args, command)
@@ -122,9 +121,9 @@ client.on('message', (msg) => {
         case 'adios':
           adios(msg)
           break
-        // case 'help':
-        //   help(msg, client)
-        //   break
+        case 'help':
+          help(msg, client)
+          break
         case 'wiki':
         case 'search':
           wiki(msg, args)
@@ -132,12 +131,12 @@ client.on('message', (msg) => {
         case 'gif':
           gif(msg, args)
           break
-        // case 'inv':
-        //   invitation(msg, client)
-        //   break
-        // case 'ticket':
-        //   ticket(msg, client)
-        //   break
+        case 'inv':
+          invitation(msg, client)
+          break
+        case 'ticket':
+          ticket(msg, client)
+          break
         case 'rename':
           renameChannel(msg, args)
           break

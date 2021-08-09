@@ -8,7 +8,7 @@ const serverAvatar = (msg) => {
         .setImage(server.iconURL({dynamic: true, size : 1024 }))
         .setColor(config.embedColor)
         .setFooter(msg.author.username, msg.author.displayAvatarURL())
-    msg.channel.send(embed)
+    msg.channel.send({ embeds: [embed] })
 }
 
 module.exports = serverAvatar

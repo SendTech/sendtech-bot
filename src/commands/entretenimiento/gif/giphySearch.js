@@ -26,7 +26,7 @@ const giphySearch = async (msg, args, rating) => {
     const embed = new MessageEmbed()
     .setImage(gifUrl)
     .setColor(config.embedColor)
-    msg.channel.send(embed).then(msg => msg.react(randomReaction));
+    msg.channel.send({embeds: [embed]}).then(msg => msg.react(randomReaction));
   }
 
   catch (err) {
@@ -35,14 +35,14 @@ const giphySearch = async (msg, args, rating) => {
       .setTitle(`El comando es ${config.prefix}gif [nombre] no ${config.prefix}gif`)
       .setImage('https://media.giphy.com/media/eKrgVyZ7zLvJrgZNZn/giphy.gif')
       .setColor(config.embedColor)
-      msg.channel.send(embed)
+      msg.channel.send({embeds: [embed]});
   }
   else {
     const embed = new MessageEmbed()
     .setTitle('No se ha encontrado ningún gif')
     .setImage('https://media.giphy.com/media/8L0Pky6C83SzkzU55a/giphy.gif')
     .setColor(config.embedColor)
-    msg.channel.send(embed)
+    msg.channel.send({embeds: [embed]});
   }
   }
 }

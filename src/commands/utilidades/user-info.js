@@ -40,7 +40,7 @@ const userInfo = (msg) => {
             inline: true
         }
     )
-    msg.channel.send(embed);
+    msg.channel.send({ embeds: [embed] });
 }
     else {
         const bot = member.bot ? 'Si' : 'No' ;
@@ -78,7 +78,7 @@ const userInfo = (msg) => {
                 inline: true
             }
         )
-        msg.channel.send(embed);
+        msg.channel.send({ embeds: [embed] });
     }
 }
 

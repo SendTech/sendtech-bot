@@ -9,11 +9,11 @@ const { MessageEmbed } = require('discord.js')
 const sendEmbedError = ({ msg, title, description }) => {
   const embed = new MessageEmbed()
     .setTitle(`<:cancel:869573017452314674> ${title}`)
-    .setDescription([`${description}`])
+    .setDescription(description)
     .setImage('https://media.giphy.com/media/iJCo9daAP0xugHhhfb/giphy.gif')
     .setColor('#CE1212')
 
-  msg.channel.send(embed)
+  msg.channel.send({embeds: [embed]})
 }
 
 module.exports = sendEmbedError
