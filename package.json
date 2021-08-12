@@ -17,6 +17,7 @@
   "author": "Matias Blanc",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.21.1",
     "clipboardy": "^2.3.0",
     "discord-canvas": "^1.4.1",
     "discord-together": "^1.1.53",

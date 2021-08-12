@@ -1,26 +1,59 @@
-const fetch = require('node-fetch')
+// const { config } = require('../../../config.js')
+// const got = require("got");
+// const fetch = require('node-fetch')
+const axios = require('axios');
 
 const url = async (msg, args) => {
-    const response = new fetch(URLSearchParams(`https://api-ssl.bitly.com/v4/shorten/=${args}`))
-    console.log(response)
-    fetch( {
-        // method: 'POST',
-        // body: response,
-        'group_guid': 'Ba1bc23dE4F',
-        'domain': 'bit.ly',
-        'long_url': 'https://dev.bitly.com'
-    })
-    // const response = await fetch(`https://api-ssl.bitly.com/v4/shorten/${args}`)
-    // const response = await fetch(`https://api-ssl.bitly.com/v4/shorten&longUrl=${args}&login=Sendero Tecnologico&apiKey=167134afe300d357f314b48142a8f006e76a9c49`)
-    // const data = await response.json()
-
-    // msg.channel.send(data);
-    // const URL_API = {
-    //     "group_guid": "Ba1bc23dE4F",  
-    //     "domain": "bit.ly",  
-    //     "long_url": "https://dev.bitly.com"  
-    // }  
-    // 167134afe300d357f314b48142a8f006e76a9c49
+axios.get('https://api.short.io/api/domains', {
+    headers: {
+    accept:'application/json',
+    authorization: 'pk_aYhDNAnnBwCljRwF'
+    },
+})
+.then(function (response) {
+  console.log(response.data);
+})
+.catch(function (response) {
+  console.log(response);
+});
+    // const options = {
+    //   method: 'POST',
+    //   url: 'https://api.short.io/links',
+    //   headers: {
+    //     authorization: 'APIKEY',
+    //   },
+    //   json: {
+    //     originalURL: 'http://yourlongdomain.com/yourlonglink',
+    //     domain: 'example.com'
+    //   },
+    //   responseType: 'json'
+    // };
+    
+    // got(options).then(response => {
+    //   console.log(response.body);
+    // });
+//     const data = {
+//         'hideReferer':false,
+//         'httpsLinks':false,
+//         'hostname':'yourshortdomain.com',
+//         'linkType':'random'
+//     };
+    
+//     const options = {
+//       headers: {
+//         accept: 'application/json',
+//         'content-type': 'application/json',
+//         authorization: 'sk_crb7dhLTFWCAcv7q'
+//       }
+//     };
+    
+//     axios.post('https://api.short.io/domains/', data, options)
+//     .then(function (response) {
+//       console.log(response.data);
+//     })
+//     .catch(function (response) {
+//       console.log(response);
+//     });
 }
 
 module.exports = url

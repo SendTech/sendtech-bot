@@ -2,11 +2,6 @@ const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js')
 const clipboardy = require('clipboardy')
 const config = require('../../../config')
 
-/**
- * @function invitation
- * @param {Message} msg -> Message Object
- * @param {Client} client -> Discord Client Object
- */
 const invitation = (msg, client) => {
   const row = new MessageActionRow()
   .addComponents(

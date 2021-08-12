@@ -36,13 +36,11 @@ const ticket = (msg, client) => {
 client.on('interactionCreate', async (button) => {
     const everyone = msg.guild.roles.cache.find(rol => rol.name === '@everyone');
     const admins = msg.guild.roles.cache.find(rol => rol.name === '《 ✊ 》Admin');
-    // console.log(button.ButtonInteraction)
-    // const clickButton = button.clicker.user.username.toLowerCase();
+    const clickButton = button.user.username.toLowerCase();
 
     if (button.customId === 'open-ticket') {
         await button.update({ components: [addedTicket] });
-        // msg.guild.channels.create(`${clickButton}-st`, {
-        msg.guild.channels.create('st', {
+        msg.guild.channels.create(`${clickButton}-st`, {
             permissionOverwrites: [
                 {
                     id: everyone.id,

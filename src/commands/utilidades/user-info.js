@@ -4,20 +4,20 @@ const config = require('../../../config.js')
 const userInfo = (msg) => {
     const member = msg.mentions.users.first()
   if (!member) {
-    const user = msg.author;
-    const bot = user.bot ? 'Si' : 'No' ;
+    const user = msg.member;
+    const bot = user.user.bot ? 'Si' : 'No' ;
     const embed = new MessageEmbed()
     .setColor(config.embedColor)
-    .setThumbnail(user.displayAvatarURL())
+    .setThumbnail(user.user.displayAvatarURL())
     .addFields(
         {
             name: '<:people:869573743477927988> Nombre del usuario',
-            value:'```' + user.username+'```',
+            value:'```' + user.user.username+'```',
             inline: true
         },
         {
             name: '<:tag:869590351994835014> Etiqueta',
-            value: '```#'+user.discriminator+'```',
+            value: '```#'+user.user.discriminator+'```',
             inline: true
         },
         {
@@ -31,12 +31,12 @@ const userInfo = (msg) => {
         },
         {
             name: '<:date:869574756129710080> Creaste tu cuenta',
-            value: '```'  + msg.author.createdAt.toDateString() +'```',
+            value: '```'  + user.user.createdAt.toDateString() +'```',
             inline: true
         },
         {
             name: '<:date:869574756129710080> Te uniste',
-            value: '```' + msg.member.joinedAt.toDateString() +'```',
+            value: '```' + user.joinedAt.toDateString() +'```',
             inline: true
         }
     )

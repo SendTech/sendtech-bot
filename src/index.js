@@ -20,13 +20,13 @@ const help = require('./commands/server/help.js');
 const npm = require('./commands/utilidades/npm.js');
 const pingPong = require('./commands/utilidades/ping');
 const avatar = require('./commands/utilidades/avatar.js');
-const url = require('./commands/utilidades/URLcutter.js');
 const wiki = require('./commands/utilidades/wiki.js');
 const userInfo = require('./commands/utilidades/user-info.js');
 const createEmbed = require('./commands/utilidades/embed.js');
 const createPoll = require('./commands/utilidades/poll.js');
 const apodo = require('./commands/utilidades/apodo.js');
 const serverAvatar = require('./commands/utilidades/server-avatar.js');
+// const urlCutter = require('./commands/utilidades/URLcutter.js');
 // admin
 const renameChannel = require('./commands/admin/renameChannel.js');
 const deleteChannel = require('./commands/admin/deleteChannel.js');
@@ -102,9 +102,9 @@ client.on('messageCreate', (msg) => {
         case 'server-info':
           server(msg)
           break
-        case 'url':
-          url(msg, args)
-          break
+        // case 'url':
+        //   urlCutter(msg, args)
+        //   break
         case 'avatar':
           avatar(msg)
           break

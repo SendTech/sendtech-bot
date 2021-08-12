@@ -1,7 +1,7 @@
 const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js')
 const config = require('../../../config.js')
 
-const avatar = (msg, interaction) => {
+const avatar = (msg) => {
   const member = msg.mentions.users.first()
   if (!member) {
     const row = new MessageActionRow()

@@ -63,7 +63,7 @@ client.on('interactionCreate', async (button) => {
       `)
       button.reply({embeds: [embed], ephemeral: true })
   }
-  if(button.customId === 'button-utilities') {
+  else if(button.customId === 'button-utilities') {
     const embed = new MessageEmbed()
       .setAuthor(username, avatarUrl)
       .setTitle('<:utilities_button:869569323725893633> Utilidades')
@@ -80,7 +80,7 @@ client.on('interactionCreate', async (button) => {
       `)
       button.reply({embeds: [embed], ephemeral: true })
   }
-  if(button.customId === 'button-server') {
+  else if(button.customId === 'button-server') {
     const embed = new MessageEmbed()
       .setAuthor(username, avatarUrl)
       .setTitle('<:server_button:869571340838010960> Server')
@@ -93,7 +93,7 @@ client.on('interactionCreate', async (button) => {
       `)
       button.reply({embeds: [embed], ephemeral: true })
   }
-  if(button.customId === 'button-admin') {
+  else if(button.customId === 'button-admin') {
     const embed = new MessageEmbed()
       .setAuthor(username, avatarUrl)
       .setTitle('<:admin_button:869567092003864696> Admin')
