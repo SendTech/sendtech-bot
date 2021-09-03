@@ -17,6 +17,7 @@ const ball = (msg, args) => {
         const embed = new MessageEmbed()
         .setTitle(`El comando es ${config.prefix}8ball [pregunta] no ${config.prefix}8ball`)
         .setImage('https://media.giphy.com/media/eKrgVyZ7zLvJrgZNZn/giphy.gif')
+        .setFooter('Los [] no van')
         .setColor(config.embedColor)
         msg.channel.send({embeds: [embed]});
     }

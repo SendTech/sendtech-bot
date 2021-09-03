@@ -31,8 +31,9 @@ const ticket = (msg, client) => {
     const embed = new MessageEmbed()
     .setTitle('<:people:869573743477927988> Tienes algo que decirles a los admins?')
     .setColor(config.embedColor)
-    msg.channel.send({ embeds: [embed], components: [addTicket]});
-
+    msg.channel.send({ embeds: [embed], components: [addTicket]}).then(msg =>{
+    setTimeout(() => msg.delete(), 5000);
+    })
 client.on('interactionCreate', async (button) => {
     const everyone = msg.guild.roles.cache.find(rol => rol.name === '@everyone');
     const admins = msg.guild.roles.cache.find(rol => rol.name === '《 ✊ 》Admin');

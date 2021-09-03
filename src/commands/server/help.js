@@ -48,18 +48,21 @@ const help = (msg, client) => {
     msg.channel.send({embeds: [embed], components: [row]}).then(msg => {
 
 client.on('interactionCreate', async (button) => {
+  const commonHelp = `<:punto:875366454000754708> **${config.prefix}`;
+
   if(button.customId === 'button-entertainment') {
     const embed = new MessageEmbed()
       .setAuthor(username, avatarUrl)
       .setTitle('<:entertainment_button:869568714436120576> Entretenimiento')
       .setColor(config.embedColor)
       .setDescription(`
-        **${config.prefix}8ball [pregunta]**: Preguntame algo
-        **${config.prefix}gif [nombre]**: Te busco un gif
-        **${config.prefix}hola**: Te saludo
-        **${config.prefix}adios**: Te despido por hoy
-        **${config.prefix}flip**: Tira una moneda al aire
-        **${config.prefix}say [mensaje]**: Haz que yo hable
+      ${commonHelp}8ball [pregunta]**: Preguntame algo
+      ${commonHelp}gif [nombre]**: Te busco un gif
+      ${commonHelp}hola**: Te saludo
+      ${commonHelp}adios**: Te despido por hoy
+      ${commonHelp}flip**: Tira una moneda al aire
+      ${commonHelp}say [mensaje]**: Haz que yo hable
+      ${commonHelp}youtube**: Mira youtube con tus amigos
       `)
       button.reply({embeds: [embed], ephemeral: true })
   }
@@ -69,14 +72,14 @@ client.on('interactionCreate', async (button) => {
       .setTitle('<:utilities_button:869569323725893633> Utilidades')
       .setColor(config.embedColor)
       .setDescription(`
-        **${config.prefix}embed**: Escribe un embed
-        **${config.prefix}npm**: Busca algun paquete de npm
-        **${config.prefix}wiki [duda]**: Busca algo en la wikipedia
-        **${config.prefix}ping**: Quieres saber que tan rapido soy?
-        **${config.prefix}apodo [name]**: Te cambia tu apodo en el server
-        **${config.prefix}avatar**: Muestranos a todos tu hermosa foto o de otro user
-        **${config.prefix}server-avatar**: Te muestra el avatar del server
-        **${config.prefix}user-info**: Ve informacion sobre ti u otro usuario
+        ${commonHelp}embed**: Escribe un embed
+        ${commonHelp}npm**: Busca algun paquete de npm
+        ${commonHelp}wiki [duda]**: Busca algo en la wikipedia
+        ${commonHelp}ping**: Quieres saber que tan rapido soy?
+        ${commonHelp}apodo [name]**: Te cambia tu apodo en el server
+        ${commonHelp}avatar**: Muestranos a todos tu hermosa foto o de otro user
+        ${commonHelp}server-avatar**: Te muestra el avatar del server
+        ${commonHelp}user-info**: Ve informacion sobre ti u otro usuario
       `)
       button.reply({embeds: [embed], ephemeral: true })
   }
@@ -86,10 +89,10 @@ client.on('interactionCreate', async (button) => {
       .setTitle('<:server_button:869571340838010960> Server')
       .setColor(config.embedColor)
       .setDescription(`
-        **${config.prefix}server-info**: Informacion sobre el server
-        **${config.prefix}inv**: Invita gente a sendero tecnologico
-        **${config.prefix}sug [sugerencia]**: Sugerencia para el server
-        **${config.prefix}ticket**: Abre un canal con los admins
+        ${commonHelp}server-info**: Informacion sobre el server
+        ${commonHelp}inv**: Invita gente a sendero tecnologico
+        ${commonHelp}sug [sugerencia]**: Sugerencia para el server
+        ${commonHelp}ticket**: Abre un canal con los admins
       `)
       button.reply({embeds: [embed], ephemeral: true })
   }
@@ -99,11 +102,11 @@ client.on('interactionCreate', async (button) => {
       .setTitle('<:admin_button:869567092003864696> Admin')
       .setColor(config.embedColor)
       .setDescription(`
-        **${config.prefix}delete**: Elimina el canal
-        **${config.prefix}lock**: mutea el canal
-        **${config.prefix}unlock**: Desmutea el canal
-        **${config.prefix}rename**: Renombra un canal
-        **${config.prefix}autorole**: Haces un hermoso reaction role
+        ${commonHelp}delete**: Elimina el canal
+        ${commonHelp}lock**: mutea el canal
+        ${commonHelp}unlock**: Desmutea el canal
+        ${commonHelp}rename**: Renombra un canal
+        ${commonHelp}autorole**: Haces un hermoso reaction role
       `)
       button.reply({embeds: [embed], ephemeral: true })
   }

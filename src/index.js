@@ -10,6 +10,8 @@ const ball = require('./commands/entretenimiento/8ball.js')
 const flipCoin = require('./commands/entretenimiento/flipCoin.js');
 const say = require('./commands/entretenimiento/say.js');
 const youtube = require('./commands/entretenimiento/youtube.js');
+// Proyectos
+const developer = require('./commands/Proyectos/busco developer.js')
 // Server
 const invitation = require('./commands/server/inv.js');
 const suggest = require('./commands/server/suggest.js');
@@ -26,13 +28,13 @@ const createEmbed = require('./commands/utilidades/embed.js');
 const createPoll = require('./commands/utilidades/poll.js');
 const apodo = require('./commands/utilidades/apodo.js');
 const serverAvatar = require('./commands/utilidades/server-avatar.js');
+const tiktok = require('./commands/utilidades/tiktok.js');
 // const urlCutter = require('./commands/utilidades/URLcutter.js');
 // admin
 const renameChannel = require('./commands/admin/renameChannel.js');
 const deleteChannel = require('./commands/admin/deleteChannel.js');
 const lockChannel = require('./commands/admin/lockChannel.js');
 const unlockChannel = require('./commands/admin/unlockChannel.js');
-const autorole = require('./commands/admin/autorole.js');
 
 // El intents le da permiso para dar roles y dar la bienvenida
 const client = new Client({ intents: 32767})
@@ -78,6 +80,9 @@ client.on('messageCreate', (msg) => {
         case 'user-info':
           userInfo(msg, args)
           break
+        case 'bs-developer':
+          developer(msg)
+          break
         case 'poll':
           createPoll(msg, args)
           break
@@ -86,9 +91,6 @@ client.on('messageCreate', (msg) => {
         break
         case 'server-avatar':
           serverAvatar(msg)
-          break
-        case 'autorole':
-          autorole(msg, client)
           break
         case 'embed':
           createEmbed(msg, args)
@@ -101,6 +103,9 @@ client.on('messageCreate', (msg) => {
           break
         case 'server-info':
           server(msg)
+          break
+        case 'tiktok':
+          tiktok(msg, args)
           break
         // case 'url':
         //   urlCutter(msg, args)
